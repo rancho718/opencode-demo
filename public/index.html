@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>猜你想问 - Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 顶部导航 -->
+    <header class="header">
+      <div class="header-left">
+        <span class="back-btn">‹</span>
+      </div>
+      <div class="header-title">专属服务群</div>
+      <div class="header-right">
+        <span class="more-btn">⋮</span>
+      </div>
+    </header>
+
+    <!-- 用户特征选择器 -->
+    <div class="user-selector">
+      <label>模拟用户：</label>
+      <select id="userSelect">
+        <option value="0">新用户 SU7 (新用户)</option>
+        <option value="1">老用户 SU7 Max (有维修工单)</option>
+        <option value="2">YU7用户 (有故障报警)</option>
+        <option value="3">SU7用户 (保险即将到期)</option>
+      </select>
+      <button id="refreshBtn" class="refresh-btn">🔄 换一批</button>
+    </div>
+
+    <!-- 聊天区域 -->
+    <div class="chat-area" id="chatArea">
+      <!-- 欢迎消息 -->
+      <div class="message agent">
+        <div class="avatar">
+          <div class="avatar-inner">
+            <div class="avatar-hair"></div>
+            <div class="avatar-face">
+              <div class="avatar-eyes">
+                <div class="avatar-eye"></div>
+                <div class="avatar-eye"></div>
+              </div>
+              <div class="avatar-smile"></div>
+            </div>
+            <div class="avatar-ear left"></div>
+            <div class="avatar-ear right"></div>
+            <div class="avatar-body"></div>
+          </div>
+        </div>
+        <div class="bubble">
+          <p>您好！我是您的小米汽车专属服务助手小蓝~ 🚗</p>
+          <p>根据您的情况，为您智能推荐以下可能感兴趣的问题：</p>
+        </div>
+      </div>
+
+      <!-- 猜你想问卡片 -->
+      <div class="guess-card" id="guessCard">
+        <div class="guess-header">
+          <span class="guess-icon">💡</span>
+          <span class="guess-title">猜你想问</span>
+        </div>
+        <div class="question-list" id="questionList">
+          <!-- 问题列表将通过JS动态生成 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 输入区域 -->
+    <div class="input-area" id="inputArea">
+      <input type="text" id="messageInput" placeholder="请输入您的问题...">
+      <button id="sendBtn">发送</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

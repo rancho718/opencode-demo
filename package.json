@@ -1,0 +1,12 @@
+{
+  "name": "guess-you-want-to-ask-demo",
+  "version": "1.0.0",
+  "description": "猜你想问 C端 Demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
