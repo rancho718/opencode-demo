@@ -89,6 +89,7 @@ const mockUsers = [
 
 let currentQuestions = [];
 let currentUserFeatures = null;
+let isQuestionsExpanded = false;
 
 // 初始化
 document.addEventListener('DOMContentLoaded', async () => {
@@ -183,6 +184,9 @@ async function fetchRecommendations() {
   const questionList = document.getElementById('questionList');
   questionList.innerHTML = '<div class="loading">正在智能推荐...</div>';
   
+  // 重置展开状态
+  isQuestionsExpanded = false;
+  
   // 模拟网络延迟
   setTimeout(() => {
     // 直接调用本地算法，不再请求 /api/recommend
@@ -201,13 +205,37 @@ function renderQuestions(questions) {
     return;
   }
   
-  questionList.innerHTML = questions.map(q => `
+  // 决定显示数量
+  const limit = isQuestionsExpanded ? questions.length : 5;
+  const displayQuestions = questions.slice(0, limit);
+  const hasMore = questions.length > 5;
+  
+  let html = displayQuestions.map(q => `
     <div class="question-item" data-id="${q.id}" onclick="showAnswer('${q.id}')">
       <span class="question-rank">${q.rank}</span>
       <span class="question-text">${q.question}</span>
       <span class="question-arrow">›</span>
     </div>
   `).join('');
+  
+  // 添加"更多"按钮
+  if (hasMore) {
+    const btnText = isQuestionsExpanded ? '收起' : '查看更多';
+    const iconClass = isQuestionsExpanded ? 'expanded' : '';
+    html += `
+      <button class="show-more-btn ${iconClass}" onclick="toggleShowMore()">
+        ${btnText} <span class="show-more-icon">▼</span>
+      </button>
+    `;
+  }
+  
+  questionList.innerHTML = html;
+}
+
+// 切换显示更多
+function toggleShowMore() {
+  isQuestionsExpanded = !isQuestionsExpanded;
+  renderQuestions(currentQuestions);
 }
 
 // 显示答案 - 在聊天框中以对话形式出现
